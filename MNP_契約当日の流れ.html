@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>契約当日の流れ｜作業マニュアル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:     #0f2040;
+    --blue:     #1e5fbe;
+    --blue-lt:  #e8f0fc;
+    --blue-bdr: #a8c4f0;
+    --green:    #0a6e50;
+    --green-lt: #e6f5f0;
+    --green-bdr:#7dcbb8;
+    --red:      #c0392b;
+    --red-lt:   #fef0ee;
+    --red-bdr:  #f5a09a;
+    --amber:    #8a5500;
+    --amber-lt: #fff8e6;
+    --amber-bdr:#f5c46b;
+    --purple:   #5a2d82;
+    --purple-lt:#f5f0ff;
+    --purple-bdr:#c4a0f0;
+    --gray:     #555;
+    --gray-lt:  #f5f5f0;
+    --text:     #1a1a1a;
+    --muted:    #666;
+    --bg:       #f4f4ef;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .wrapper { max-width: 720px; margin: 0 auto; padding: 36px 20px 64px; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #0f2040 0%, #1a5cbf 100%);
+    border-radius: 16px;
+    padding: 34px 40px 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content:'';
+    position:absolute; right:-50px; bottom:-50px;
+    width:200px; height:200px; border-radius:50%;
+    background:rgba(255,255,255,.05);
+  }
+  .hero-label {
+    display:inline-block;
+    background:rgba(255,255,255,.18); color:#fff;
+    font-size:11px; font-weight:700;
+    padding:4px 14px; border-radius:20px;
+    letter-spacing:1px; border:1px solid rgba(255,255,255,.25);
+    margin-bottom:12px;
+  }
+  .hero-title { font-size:26px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:6px; }
+  .hero-sub   { font-size:13px; color:rgba(255,255,255,.65); }
+
+  /* ── TIME WARNING ── */
+  .time-warning {
+    background: var(--red-lt);
+    border: 2px solid var(--red);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 24px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .time-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+  .time-text { font-size: 13.5px; line-height: 1.85; color: #8b2020; }
+  .time-text strong { font-weight: 700; color: var(--red); }
+
+  /* ── STEP LIST ── */
+  .step-list { display: flex; flex-direction: column; gap: 14px; }
+
+  .step-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e0e0da;
+    overflow: hidden;
+  }
+
+  .step-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #f0f0ea;
+  }
+  .step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 14px; font-weight: 900; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-num.blue   { background: var(--blue); }
+  .step-num.green  { background: var(--green); }
+  .step-num.amber  { background: var(--amber); }
+  .step-num.red    { background: var(--red); }
+  .step-num.purple { background: var(--purple); }
+
+  .step-title {
+    font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4;
+    flex: 1;
+  }
+  .step-badge {
+    font-size: 10px; font-weight: 700;
+    padding: 3px 10px; border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .step-badge.important { background: var(--red); color: #fff; }
+  .step-badge.check     { background: var(--blue); color: #fff; }
+  .step-badge.report    { background: var(--green); color: #fff; }
+
+  .step-body { padding: 14px 20px 16px; }
+  .step-body .action {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13.5px; color: var(--muted); line-height: 1.85;
+    margin-bottom: 8px;
+  }
+  .step-body .action:last-child { margin-bottom: 0; }
+  .step-body .action .arrow { color: var(--blue); font-weight: 700; flex-shrink: 0; }
+  .step-body .action strong { color: var(--text); font-weight: 700; }
+  .step-body .action .em   { color: var(--blue);  font-weight: 700; }
+  .step-body .action .em-r { color: var(--red);   font-weight: 700; }
+  .step-body .action .em-g { color: var(--green); font-weight: 700; }
+
+  /* ── NOTES ── */
+  .note {
+    border-left: 3px solid; border-radius: 0 8px 8px 0;
+    padding: 9px 14px; margin-top: 10px;
+    font-size: 12.5px; line-height: 1.8;
+  }
+  .note.blue   { border-color:var(--blue);      background:var(--blue-lt);   color:#1a3a7a; }
+  .note.green  { border-color:var(--green);     background:var(--green-lt);  color:var(--green); }
+  .note.amber  { border-color:var(--amber-bdr); background:var(--amber-lt);  color:var(--amber); }
+  .note.red    { border-color:var(--red);       background:var(--red-lt);    color:#8b2020; }
+  .note.purple { border-color:var(--purple-bdr);background:var(--purple-lt); color:var(--purple); }
+  .note.gray   { border-color:#bbb;             background:var(--gray-lt);   color:#555; }
+  .note strong { font-weight: 700; }
+
+  /* ── CHECK LIST ── */
+  .check-list { list-style: none; margin-top: 10px; }
+  .check-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 13px; color: var(--muted); line-height: 1.75;
+    padding: 5px 0; border-bottom: 1px solid #f0f0ea;
+  }
+  .check-list li:last-child { border-bottom: none; }
+  .check-list li .ck { color: var(--blue); font-weight: 700; flex-shrink: 0; }
+
+  /* ── REVIEW CARD ── */
+  .review-card {
+    background: var(--green-lt);
+    border: 1.5px solid var(--green-bdr);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 10px;
+  }
+  .review-card .review-title {
+    font-size: 12px; font-weight: 700; color: var(--green);
+    letter-spacing: .08em; margin-bottom: 10px;
+  }
+  .review-card .review-meta {
+    display: flex; gap: 16px; margin-bottom: 8px;
+  }
+  .review-card .review-meta span {
+    font-size: 12px; font-weight: 700; color: var(--green);
+    background: #fff; padding: 3px 12px; border-radius: 999px;
+    border: 1px solid var(--green-bdr);
+  }
+  .review-card .review-body {
+    font-size: 13px; color: #2a5a4a; line-height: 1.85;
+  }
+
+  /* ── SPECIAL CARD ── */
+  .special-card {
+    border-radius: 12px; padding: 14px 18px; margin-top: 10px;
+    font-size: 13px; line-height: 1.85; border: 1.5px solid;
+  }
+  .special-card.amber { background:var(--amber-lt); border-color:var(--amber-bdr); color:var(--amber); }
+  .special-card.red   { background:var(--red-lt);   border-color:var(--red-bdr);   color:#8b2020; }
+  .special-card.blue  { background:var(--blue-lt);  border-color:var(--blue-bdr);  color:#1a3a7a; }
+  .special-card .card-title { font-weight:700; font-size:12px; letter-spacing:.08em; margin-bottom:8px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label-row {
+    display: flex; align-items: center; gap: 10px;
+    margin: 28px 0 14px;
+  }
+  .section-label-icon {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .section-label-icon.blue   { background: var(--blue); }
+  .section-label-icon.purple { background: var(--purple); }
+  .section-label-icon.amber  { background: var(--amber); }
+  .section-label-text { font-size: 14px; font-weight: 700; color: var(--navy); }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center; font-size: 11.5px; color: #aaa;
+    margin-top: 36px; padding-top: 20px; border-top: 1px solid #e0e0da;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">⭐ 契約当日マニュアル</div>
+  <div class="hero-title">契約の流れ<br>ステップガイド</div>
+  <div class="hero-sub">1 DAY CAMP ／ 当日作業手順書</div>
+</div>
+
+<!-- 時間厳守 -->
+<div class="time-warning">
+  <div class="time-icon">⏰</div>
+  <div class="time-text">
+    <strong>時間厳守</strong><br>
+    遅れる場合は必ず<strong>その日の午前中にご連絡</strong>ください。<br>
+    直前の遅刻は<strong>至急ご連絡</strong>をお願いします。
+  </div>
+</div>
+
+<!-- STEP LIST -->
+<div class="step-list">
+
+  <!-- STEP 1 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num blue">1</div>
+      <div class="step-title">契約開始の報告</div>
+      <div class="step-badge report">要報告</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>お店に着いて契約が始まったら、<span class="em">公式LINEに報告</span>してください。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num blue">2</div>
+      <div class="step-title">電話番号と予約番号のスクリーンショット</div>
+      <div class="step-badge check">確認</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>店員に<strong>電話番号と予約番号</strong>を確認し、スクリーンショットを撮ってください。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num red">3</div>
+      <div class="step-title">案件の内容を確認する</div>
+      <div class="step-badge important">重要</div>
+    </div>
+    <div class="step-body">
+      <ul class="check-list">
+        <li><span class="ck">✔</span> 契約する<strong>機種</strong>を確認</li>
+        <li><span class="ck">✔</span> 契約する<strong>プラン</strong>を確認</li>
+        <li><span class="ck">✔</span> 契約する<strong>オプション</strong>と<strong>いつ解約できるか</strong>を確認</li>
+      </ul>
+      <div class="note amber">❓ 内容が分からない場合は、その場で<strong>公式LINEに問い合わせてください。</strong></div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num blue">4</div>
+      <div class="step-title">買う端末の色を確認する</div>
+      <div class="step-badge check">確認</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>色の指定がある場合があります。<span class="em">公式LINEで色指定の有無</span>を確認してください。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num amber">5</div>
+      <div class="step-title">ネットワーク暗証番号の設定</div>
+      <div class="step-badge check">確認</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>店員に暗証番号を求められたら、<span class="em">「1580」</span>で登録してください。</div>
+      </div>
+      <div class="note blue">
+        📌 <strong>Q：端末の箱に電話番号や名前を記入するか聞かれたら？</strong><br>
+        → <strong>一切、何も記入しないよう</strong>店員にお伝えください。
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num red">6</div>
+      <div class="step-title">端末の領収書を必ず受け取り、写真を送る</div>
+      <div class="step-badge important">重要</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>領収書を必ずもらい、<span class="em">公式LINEに写真をアップロード</span>してください。</div>
+      </div>
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>最後に、<strong>端末と一緒に郵送</strong>します。</div>
+      </div>
+      <div class="note gray">📎 領収書がない場合は不要です。</div>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num green">7</div>
+      <div class="step-title">契約終了の報告</div>
+      <div class="step-badge report">要報告</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>すべての契約が終わったら、<span class="em">公式LINEに「契約終了」の報告</span>をしてください。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num amber">8</div>
+      <div class="step-title">ワイモバイルは稼働確認を実施する</div>
+      <div class="step-badge important">必須</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>ワイモバイルの場合は<strong>稼働確認が必要</strong>です。</div>
+      </div>
+      <ul class="check-list">
+        <li><span class="ck">✔</span> 稼働確認の<strong>内容</strong>を店員に確認</li>
+        <li><span class="ck">✔</span> 稼働確認を行う<strong>日時（何日の何時）</strong>まで確認</li>
+      </ul>
+      <div class="note blue">📝 確認した日時は<strong>公式LINEに記録として残してください。</strong></div>
+    </div>
+  </div>
+
+  <!-- STEP 9 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num purple">9</div>
+      <div class="step-title">感想を公式LINEに送る</div>
+      <div class="step-badge report">要送信</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>案件終了後、<strong>できるだけお早めに</strong>公式LINEへ感想を送ってください。</div>
+      </div>
+
+      <div class="note purple">
+        ⭐ <strong>感想を書く際の3つのポイント</strong><br>
+        ① <strong>案件報酬日</strong>を記載する<br>
+        ② <strong>獲得金額</strong>を記載する<br>
+        ③「MNP」というワードは使わず、<strong>「案件」</strong>という書き方にする
+      </div>
+
+      <!-- 感想サンプル -->
+      <div class="review-card" style="margin-top:12px;">
+        <div class="review-title">📝 感想の記入例</div>
+        <div class="review-meta">
+          <span>報酬日：7/30</span>
+          <span>獲得金額：15,000円</span>
+        </div>
+        <div class="review-body">
+          初めに手厚い説明もあったので、そこで不安や疑問を解消してスッキリした状態で案件に臨むことができました！新たに分からないところが出てきたときもすぐに対応していただけて安心でした✨ 案件の内容もそこまで難しくなく、初案件には同伴なしで1人でこなすことができて感動しました😊 ぜひまた案件をしたいなと思っています♪
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 10 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num red">10</div>
+      <div class="step-title">端末にSIMが入っていないか確認する</div>
+      <div class="step-badge important">重要</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>端末にSIMが入ったままの場合があります。<span class="em-r">必ずSIMを抜いてください。</span></div>
+      </div>
+      <div class="note red">📌 SIMは<strong>ご自身で管理</strong>してください。郵送する端末にSIMを入れないようご注意ください。</div>
+    </div>
+  </div>
+
+  <!-- STEP 11 -->
+  <div class="step-card">
+    <div class="step-header">
+      <div class="step-num blue">11</div>
+      <div class="step-title">端末を梱包して郵送する</div>
+      <div class="step-badge check">確認</div>
+    </div>
+    <div class="step-body">
+      <div class="action">
+        <div class="arrow">⇨</div>
+        <div>端末を梱包し、<span class="em">所定の住所へ郵送</span>してください。<br>郵送先は<strong>公式LINEにてお伝えします。</strong></div>
+      </div>
+
+      <div class="special-card blue" style="margin-top:12px;">
+        <div class="card-title">📦 端末郵送の注意事項</div>
+        ✅ 契約終了後、<strong>当日または翌日までに</strong>郵送してください<br>
+        ✅ 郵送料金は通信費に合算してお振込みします（<strong>元払い</strong>でお願いします）<br>
+        ✅ <strong>領収書・伝票の写真</strong>を公式LINEへ送ってください<br>
+        ✅ 確認でき次第、請求書を作成し指定口座へお振込みします
+      </div>
+
+      <div class="special-card amber" style="margin-top:10px;">
+        <div class="card-title">⚠️ 梱包・取り扱い上の注意</div>
+        🛡 <strong>プチプチなどの梱包材</strong>を使い、端末に傷がつかないようにしてください<br>
+        🔍 すり替えがあった場合は<strong>製造番号で確認</strong>できます<br>
+        💸 大きな傷等が確認された場合、<strong>ペナルティが発生する可能性</strong>がありますのでご注意ください
+      </div>
+    </div>
+  </div>
+
+</div><!-- /step-list -->
+
+<!-- FOOTER -->
+<div class="footer">
+  契約当日マニュアル ／ 1 DAY CAMP ／ 公式LINEに不明点はお気軽にご連絡ください
+</div>
+
+</div><!-- /wrapper -->
+</body>
+</html>
